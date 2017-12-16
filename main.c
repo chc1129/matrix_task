@@ -7,12 +7,16 @@ int main( void ) {
   int dummyArg = 0;
 
   printf("Status Change Prgram Start.\n");
+  printf("---->\n");
+
+  gSts = STS_INIT;
 
   ret = (*chgStsTask_table[ gSts ][ gEvent ])( dummyArg );
   if ( ret != 0 ) {
     printf("Err\n");
   }
 
+  printf("<----\n");
   printf("Status Change Prgram End.\n");
 
   return 0;

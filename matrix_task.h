@@ -20,9 +20,9 @@ enum {
 } eventNum;
 
 /* global status */
-int gSts;
+static int gSts;
 /* global event */
-int gEvent;
+static int gEvent;
 
 /* proto type */
 int chgStsTask_00( int arg );
