@@ -11,7 +11,7 @@ int main( void ) {
 
   gSts = STS_INIT;
 
-  ret = (*chgStsTask_table[ gSts ][ gEvent ])( dummyArg );
+  ret = eventNotice( EVENT_001 );
   if ( ret != 0 ) {
     printf("Err\n");
   }
