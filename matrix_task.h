@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time_t>
+#include "main.h"
 
 /* status */
 enum {
   STS_INIT,
   STS_001,
   STS_002,
-  STS_003,
+  STS_END,
   STS_MAX
 } prgSts;
 
@@ -23,18 +24,22 @@ static int gSts;
 /* global event */
 static int gEvent;
 
-/* proto type */
-int chgStsTask_00( int arg );
-int chgStsTask_01( int arg );
-int chgStsTask_02( int arg );
-int chgStsTask_03( int arg );
-int chgStsTask_04( int arg );
-int chgStsTask_05( int arg );
-int chgStsTask_06( int arg );
-int chgStsTask_07( int arg );
+/* debug */
+typedef matrixLog {
+  time_t  date;
+  int     status;
+  int     event;
+} matrixLog_t;
 
-typedef int ( *CHGSTSTASK_FUNC )( int arg );
-extern int eventNotice( int notice_event );
+/* proto type */
+int chgStsTask_00( int event );
+int chgStsTask_01( int event );
+int chgStsTask_02( int event );
+int chgStsTask_03( int event );
+int chgStsTask_04( int event );
+int chgStsTask_05( int event );
+int chgStsTask_06( int event );
+int chgStsTask_07( int event );
 
 /* Function Table */
 static CHGSTSTASK_FUNC chgStsTask_table[ STS_MAX ][ EVENT_MAX ] = {
@@ -44,12 +49,7 @@ static CHGSTSTASK_FUNC chgStsTask_table[ STS_MAX ][ EVENT_MAX ] = {
   { chgStsTask_06, chgStsTask_07 }
 };
 
+typedef int ( *CHGSTSTASK_FUNC )( int event );
 
-typedef matrixLog {
-  time_t  date;
-  int     status;
-  int     event;
-} matrixLog_t;
-
-matrixLog_t debugData[ 10 ];
+extern int eventNotice( int notice_event );
 
