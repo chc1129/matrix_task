@@ -38,6 +38,11 @@ int chgStsTask_03( int event ) {
 int chgStsTask_04( int event ) {
   /* fuction action */
   printf("Path Through %s Now Status:%d, Event:%d.\n", __FUNCTION__, gSts, gEvent);
+
+  if (event == EVENT_002) {
+    gSts = STS_END;
+  }
+
   return 0;
 }
 
@@ -73,6 +78,7 @@ int chgStsTask_07( int event ) {
 
 int eventNotice( int notice_event ) {
   int ret = 0;
+  int nowSts = gSts;
 
   if (( EVENT_001 > notice_event ) || ( EVENT_MAX < notice_event )) {
     /* err event */
@@ -86,7 +92,7 @@ int eventNotice( int notice_event ) {
     return -1;
   }
 
-  ret = setDebugLog( notice_event );
+  ret = setDebugLog( nowSts, notice_event );
   if (ret != 0) {
     return -1;
   }

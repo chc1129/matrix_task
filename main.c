@@ -5,21 +5,39 @@
 
 int main( void ) {
   int ret = 0;
-  int dummyArg = 0;
+  int cnt = 0;
 
   printf("Status Change Prgram Start.\n");
 
   gSts = STS_INIT;
 
-  ret = eventNotice( EVENT_001 );
-  if ( ret != 0 ) {
-    printf("Err\n");
+  for (cnt = 0; cnt < 3; cnt++ ) {
+    ret = eventNotice( EVENT_001 );
+    if ( ret != 0 ) {
+      printf("Err\n");
+    }
+    ret = eventNotice( EVENT_002 );
+    if ( ret != 0 ) {
+      printf("Err\n");
+    }
   }
 
   printf("Status Change Prgram End.\n");
 
+  printf("\n");
+  printf("-------- SHOW DEBUG LOG ---------\n");
+
+   for ( cnt = 0; cnt < DEBUG_DATA_MAX; cnt++ ) {
+    printf("[%d] : ", cnt);
+    printf("status:%d ", debugLog[cnt].debugSts);
+    printf("event:%d ", debugLog[cnt].debugEvent);
+    printf("\n");
+  }
+
+
   return 0;
  }
+
 
 int setDebugLog( int status, int event) {
 
@@ -30,6 +48,8 @@ int setDebugLog( int status, int event) {
   time( &debugLog[gDebugCnt].debugTime );
   debugLog[gDebugCnt].debugSts = status;
   debugLog[gDebugCnt].debugEvent = event;
+
+  gDebugCnt++;
 
   return 0;
 }

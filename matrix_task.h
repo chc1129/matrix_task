@@ -1,6 +1,9 @@
+#ifndef _MATRIX_TASK_
+#define _MATRIX_TASK_
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <time_t>
+#include <time.h>
 #include "main.h"
 
 /* status */
@@ -24,13 +27,6 @@ static int gSts;
 /* global event */
 static int gEvent;
 
-/* debug */
-typedef matrixLog {
-  time_t  date;
-  int     status;
-  int     event;
-} matrixLog_t;
-
 /* proto type */
 int chgStsTask_00( int event );
 int chgStsTask_01( int event );
@@ -41,6 +37,10 @@ int chgStsTask_05( int event );
 int chgStsTask_06( int event );
 int chgStsTask_07( int event );
 
+typedef int ( *CHGSTSTASK_FUNC )( int event );
+
+extern int eventNotice( int notice_event );
+
 /* Function Table */
 static CHGSTSTASK_FUNC chgStsTask_table[ STS_MAX ][ EVENT_MAX ] = {
   { chgStsTask_00, chgStsTask_01 },
@@ -49,7 +49,4 @@ static CHGSTSTASK_FUNC chgStsTask_table[ STS_MAX ][ EVENT_MAX ] = {
   { chgStsTask_06, chgStsTask_07 }
 };
 
-typedef int ( *CHGSTSTASK_FUNC )( int event );
-
-extern int eventNotice( int notice_event );
-
+#endif /* _MATRIX_TASK_ */
