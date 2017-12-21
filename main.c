@@ -7,6 +7,7 @@ int main( void ) {
   int ret = 0;
   int cnt = 0;
 
+  printf("\n");
   printf("Status Change Prgram Start.\n");
 
   gSts = STS_INIT;
@@ -24,16 +25,7 @@ int main( void ) {
 
   printf("Status Change Prgram End.\n");
 
-  printf("\n");
-  printf("-------- SHOW DEBUG LOG ---------\n");
-
-   for ( cnt = 0; cnt < DEBUG_DATA_MAX; cnt++ ) {
-    printf("[%d] : ", cnt);
-    printf("status:%d ", debugLog[cnt].debugSts);
-    printf("event:%d ", debugLog[cnt].debugEvent);
-    printf("\n");
-  }
-
+  ret = showDebugLog();
 
   return 0;
  }
@@ -52,5 +44,25 @@ int setDebugLog( int status, int event) {
   gDebugCnt++;
 
   return 0;
+}
+
+int showDebugLog( void ) {
+  int cnt = 0;
+
+
+  printf("\n");
+  printf("-------- SHOW DEBUG LOG ---------\n");
+
+   for ( cnt = 0; cnt < DEBUG_DATA_MAX; cnt++ ) {
+    printf("[%d] : ", cnt);
+    printf("status:%d ", debugLog[cnt].debugSts);
+    printf("event:%d ", debugLog[cnt].debugEvent);
+    printf("\n");
+  }
+
+  printf("-------- DEBUG LOG END ---------\n");
+  printf("\n");
+
+ return 0;
 }
 

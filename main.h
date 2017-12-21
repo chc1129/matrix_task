@@ -16,5 +16,6 @@ debugMtx_t debugLog[ DEBUG_DATA_MAX ];
 int gDebugCnt;
 
 int setDebugLog( int status, int event);
+int showDebugLog( void );
 
 #endif /* _MAIN_H_ */
