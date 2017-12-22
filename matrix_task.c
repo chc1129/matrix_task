@@ -1,4 +1,5 @@
 #include "matrix_task.h"
+#include <time.h>
 
 /* task function */
 int chgStsTask_00( int event ) {

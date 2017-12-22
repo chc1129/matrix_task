@@ -55,6 +55,7 @@ int showDebugLog( void ) {
 
    for ( cnt = 0; cnt < DEBUG_DATA_MAX; cnt++ ) {
     printf("[%d] : ", cnt);
+    printf("%s", debugLog[cnt].debugTime);
     printf("status:%d ", debugLog[cnt].debugSts);
     printf("event:%d ", debugLog[cnt].debugEvent);
     printf("\n");
